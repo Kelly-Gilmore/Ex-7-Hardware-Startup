@@ -1,2 +1,2 @@
-# Ex-7-Hardware-Startup
-Using the RaspberryPiCommon Hardware Startup templates to control hardware
+# Ex-5-Kivy-5
+Using the RaspberyPiCommon New Project template to make an example UI.

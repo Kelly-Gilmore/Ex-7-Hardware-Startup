@@ -40,7 +40,6 @@ s0.relative_move(-10)
 s0.get_position_in_units()
 # note we -10 rotations from "home"
 # There is another way to get back to home regardless of where we are
-
 # Tell the motor to go home and it will go home.
 s0.goHome()
 

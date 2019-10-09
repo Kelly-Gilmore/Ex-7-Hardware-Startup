@@ -1,0 +1,54 @@
+<Farmyard>
+    name: "farm"
+    on_enter:root.joy_thread()
+
+
+
+    FloatLayout:
+        size_hint: None, None
+
+        DPEAButton:
+            size: 500, 100
+            center_x: root.width * 0.5
+            center_y: root.height * 0.5
+
+            background_color: 0,0,0,0
+            color: 0.035, 0.152, 0.725, 1
+
+            text: "Go Back to Main Screen"
+            on_press: root.back()
+
+        ImageButton:
+            id: logo_image_button
+            source: "../../pidev/kivy/images/DPEALogoTransparent.png"
+            size: 100, 100
+            x: root.width * 0.35
+            y: root.height * 0.7
+            on_press: root.animation()
+
+        Label:
+            id: joy_label
+            text: str(root.joy_val_x) + " , " + str(root.joy_val_y)
+            color: 0, 0, 0, 1
+            x: root.joy_val_x * 500
+            y: root.joy_val_y * 500
+            bold: True
+
+
+        Label:
+            id: joy_trigger_label
+            text: str(root.joy_trigger_label)
+            color: 0, 0, 0, 1
+            x: root.width * .75
+            bold: True
+
+
+
+
+
+
+
+
+
+
+
