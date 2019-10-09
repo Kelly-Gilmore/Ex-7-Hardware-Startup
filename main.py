@@ -1,4 +1,8 @@
 import os
+import spidev
+import RPi.GPIO as GPIO
+
+
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -13,6 +17,7 @@ from time import sleep
 
 from threading import Thread
 
+from pidev.stepper import stepper
 from pidev.Joystick import Joystick
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
@@ -29,6 +34,10 @@ ADMIN_SCREEN_NAME = 'admin'
 FARMYARD_SCREEN_NAME = 'farm'
 
 joystick = Joystick(0, False)
+spi = spidev.SpiDev()
+s0 = stepper(port=0, micro_steps=32, hold_current=20, run_current=20, accel_current=20, deaccel_current=20,
+             steps_per_unit=200, speed=8)
+
 """while 1:
     print(str(joystick.get_axis('x')))
     sleep(.1) 
