@@ -8,21 +8,28 @@
 
     DPEAButton:
         id: test_button
-        text: "On" if test_button.state == "normal" else "Off"
+        text: "Click to Change Direction"
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.5
         color: 0, 1, 0, 1
+        on_press: root.change_direction()
 
-        #on_press: root.pressed()
+    DPEAButton:
+        text: "Click to Stop Motor" if root.motor else "Click to Run Motor"
+        size: 100, 100
+        x: root.width * 0.25
+        y:root.height * 0.5
+        color: 1, 0, 0, 1
+        on_press: root.run_motor()
 
-    #DPEAButton:
-     #   text: root.label_text
-      #  size: 100, 100
-       # x: root.width * 0.25
-        #y:root.height * 0.5
-        #color: 1, 0, 0, 1
-        #on_press: root.increment()
+    DPEAButton:
+        text: "Shutdown"
+        size: 100, 100
+        x: root.width * 0.25
+        y:root.height * 0.25
+        color: 1, 0, 0, 1
+        on_press: root.shutdown()
 
     ImageButton:
         id: logo_image_button
