@@ -4,6 +4,22 @@
         size_hint: None, None
 
 
+    Slider:
+        id: sheep
+        min: 0
+        max: 64
+        step: 1
+        orientation: "horizontal"
+        y: root.height * .3
+        color: 0, 0, 0, 1
+        on_touch_move: root.adjust_speed()
+
+
+    Label:
+        text: str(sheep.value)
+        x: root.width * .2
+        y: root.height * .25
+        color: 1, 0, 0, 1
 
 
     DPEAButton:
@@ -24,6 +40,15 @@
         on_press: root.run_motor()
 
     DPEAButton:
+        text: "Crazy Button"
+        size: 100, 100
+        x: root.width * 0.75
+        y: root.height * 0.25
+        color: 0, 1, 0, 1
+        on_press: root.big_function()
+
+
+    DPEAButton:
         text: "Shutdown"
         size: 100, 100
         x: root.width * 0.25
@@ -38,3 +63,4 @@
         x: root.width * 0.5
         y: root.height * 0.5
         on_press: root.pressed()
+

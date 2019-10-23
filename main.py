@@ -1,5 +1,6 @@
 import os
 import spidev
+import time
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -7,6 +8,7 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.slider import Slider
 
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
@@ -52,11 +54,14 @@ class MainScreen(Screen):
     Class to handle the main screen and its associated touch events
     """
     motor = ObjectProperty()
+    pos_1 = ObjectProperty()
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         self.motor = False
         self.direction = 0
+
+
 
     def run_motor(self):
         self.motor = not self.motor
@@ -72,6 +77,39 @@ class MainScreen(Screen):
             s0.run(1, 20)
         else:
             s0.run(0, 20)
+
+    def adjust_speed(self):
+        s0.run(self.direction, int(self.ids.sheep.value))
+
+    def big_function(self):
+        s0.set_speed(1)
+        s0.relative_move(15)
+        time.sleep(10)
+        s0.set_speed(5)
+        s0.relative_move(10)
+        time.sleep(8)
+        s0.goHome()
+        time.sleep(30)
+        s0.set_speed(8)
+        s0.relative_move(-100)
+        time.sleep(10)
+        s0.goHome()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
