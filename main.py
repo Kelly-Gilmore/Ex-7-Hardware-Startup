@@ -2,11 +2,12 @@ import os
 import spidev
 import time
 
+from time import sleep
+
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
-from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.slider import Slider
 
@@ -16,6 +17,9 @@ from pidev.kivy.PauseScreen import PauseScreen
 from pidev.stepper import stepper
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
+
+from Slush.Devices import L6470Registers
+from pidev.Cyprus_Commands import Cyprus_Commands_RPi as cyprus
 
 import RPi.GPIO as GPIO
 
@@ -95,22 +99,27 @@ class MainScreen(Screen):
         time.sleep(10)
         s0.goHome()
 
+    def binary_state(self):
+        cyprus.initialize()
+        cyprus.setup_servo(1)
+        cyprus.set_servo_position(1, 0)
+        sleep(1)
+        cyprus.set_servo_position(1, 1)
 
+    def limit_switch(self):
+        cyprus.initialize()
+        cyprus.setup_servo(1)
+        def isGPIO_P6_HIGH(self):
+            return (cyprus.read_gpio() & 0b0001) == 1
+        if isGPIO_P6_HIGH(self):
+            cyprus.set_servo_position(1, 0)
+        else:
+            cyprus.set_servo_position(1, 1)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def Talon_DC(self):
+        cyprus.initialize()
+        cyprus.setup_servo(1)
+        cyprus.set_servo_speed(1, 1)
 
 
     def shutdown(self):
@@ -118,13 +127,6 @@ class MainScreen(Screen):
         spi.close()
         GPIO.cleanup()
         os.system("sudo shutdown now")
-
-
-
-
-
-
-
 
 
     def pressed(self):

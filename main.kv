@@ -56,6 +56,31 @@
         color: 1, 0, 0, 1
         on_press: root.shutdown()
 
+    DPEAButton:
+        text: "Binary State"
+        size: 100, 100
+        x: root.width * 0.1
+        y: root.height * 0.2
+        color: 0, 1, 0, 1
+        on_press: root.binary_state()
+
+    DPEAButton:
+        text: "Limit Switch"
+        size: 100, 100
+        x: root.width * 0.4
+        y: root.height * 0.2
+        color: 0, 1, 0, 1
+        on_press: root.limit_switch()
+
+    DPEAButton:
+        text: "Talon Motor"
+        size: 100, 100
+        x: root.width * 0.25
+        y: root.height * 0.1
+        color: 0, 1, 0, 1
+        on_press: root.Talon_DC()
+
+
     ImageButton:
         id: logo_image_button
         source: "../../pidev/kivy/images/DPEALogoTransparent.png"
@@ -63,4 +88,6 @@
         x: root.width * 0.5
         y: root.height * 0.5
         on_press: root.pressed()
+
+
 
