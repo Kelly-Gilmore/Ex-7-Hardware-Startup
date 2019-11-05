@@ -116,10 +116,44 @@ class MainScreen(Screen):
         else:
             cyprus.set_servo_position(1, 1)
 
-    def Talon_DC(self):
+    def talon_switch(self):
+        cyprus.initialize()
+        cyprus.setup_servo(1)
+        def isGPIO_P6_HIGH(self):
+            return (cyprus.read_gpio() & 0b0001) == 1
+        if isGPIO_P6_HIGH(self):
+            cyprus.set_servo_speed(1, 0)
+        else:
+            cyprus.set_servo_speed(1, 1)
+
+
+    def talon_dc(self):
         cyprus.initialize()
         cyprus.setup_servo(1)
         cyprus.set_servo_speed(1, 1)
+        sleep(1)
+        cyprus.set_servo_speed(1, 0)
+        sleep(5)
+        cyprus.set_servo_speed(1, -1)
+        sleep(1)
+        cyprus.set_servo_speed(1, 0)
+        cyprus.close()
+
+    def ramp_up(self):
+        cyprus.initialize()
+        cyprus.setup_servo(1)
+        cyprus.set_servo_speed(1, 0.2)
+        sleep(4)
+        cyprus.set_servo_speed(1, 0.4)
+        sleep(4)
+        cyprus.set_servo_speed(1, 0.6)
+        sleep(4)
+        cyprus.set_servo_speed(1, 0.8)
+        sleep(4)
+        cyprus.set_servo_speed(1, 1)
+        sleep(4)
+        cyprus.set_servo_position(1, 0.5)
+        cyprus.close()
 
 
     def shutdown(self):

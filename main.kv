@@ -78,7 +78,23 @@
         x: root.width * 0.25
         y: root.height * 0.1
         color: 0, 1, 0, 1
-        on_press: root.Talon_DC()
+        on_press: root.talon_dc()
+
+    DPEAButton:
+        text: "Ramp Up"
+        size: 100, 100
+        x: root.width * 0.75
+        y: root.height * 0.1
+        color: 0, 1, 0, 1
+        on_press: root.ramp_up()
+
+    DPEAButton:
+        text: "Talon Switch"
+        size: 100, 100
+        x: root.width * 0.6
+        y: root.height * 0.2
+        color: 0, 1, 0, 1
+        on_press: root.talon_switch()
 
 
     ImageButton:
