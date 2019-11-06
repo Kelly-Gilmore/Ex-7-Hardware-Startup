@@ -96,6 +96,22 @@
         color: 0, 1, 0, 1
         on_press: root.talon_switch()
 
+    DPEAButton:
+        text: "Cytron"
+        size: 100, 100
+        x: root.width * 0.9
+        y: root.height * 0.2
+        color: 0, 1, 0, 1
+        on_press: root.cytron_dc()
+
+    DPEAButton:
+        text: "Sensor"
+        size: 80, 80
+        x: root.width * 0.5
+        y: root.height * 0.35
+        color: 0, 1, 0, 1
+        on_press: root.thread_prox_sensor()
+
 
     ImageButton:
         id: logo_image_button
@@ -104,6 +120,7 @@
         x: root.width * 0.5
         y: root.height * 0.5
         on_press: root.pressed()
+
 
 
 

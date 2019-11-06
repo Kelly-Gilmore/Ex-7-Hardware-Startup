@@ -1,6 +1,7 @@
 import os
 import spidev
 import time
+import threading
 
 from time import sleep
 
@@ -126,6 +127,30 @@ class MainScreen(Screen):
         else:
             cyprus.set_servo_speed(1, 1)
 
+    def cytron_dc(self):
+        cyprus.initialize()
+        cyprus.set_pwm_values(2, period_value=100000, compare_value=100000, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+        sleep(.5)
+        cyprus.set_pwm_values(2, period_value=100000, compare_value=0, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+        sleep(5)
+        cyprus.set_pwm_values(2, period_value=100000, compare_value=-100000, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+        sleep(.5)
+        cyprus.set_pwm_values(2, period_value=100000, compare_value=0, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+        cyprus.close()
+
+    def thread_prox_sensor(self):
+        y = threading.Thread(target=self.prox_sensor, daemon=True)
+        y.start()
+
+
+    def prox_sensor(self):
+        cyprus.initialize()
+        if (cyprus.read_gpio() & 0b0010):
+            cyprus.set_pwm_values(2, period_value=100000, compare_value=100000, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+        else:
+            cyprus.set_pwm_values(2, period_value=100000, compare_value=0, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+        cyprus.close()
+
 
     def talon_dc(self):
         cyprus.initialize()
@@ -142,16 +167,9 @@ class MainScreen(Screen):
     def ramp_up(self):
         cyprus.initialize()
         cyprus.setup_servo(1)
-        cyprus.set_servo_speed(1, 0.2)
-        sleep(4)
-        cyprus.set_servo_speed(1, 0.4)
-        sleep(4)
-        cyprus.set_servo_speed(1, 0.6)
-        sleep(4)
-        cyprus.set_servo_speed(1, 0.8)
-        sleep(4)
-        cyprus.set_servo_speed(1, 1)
-        sleep(4)
+        for i in range(2, 4, 6, 8, 10):
+            cyprus.set_servo_speed(1, i/10.0)
+            sleep(4)
         cyprus.set_servo_position(1, 0.5)
         cyprus.close()
 
